@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 
 import db from '../database';
 
-class MaterialController{
+class TypeController{
 
     public async listar(req: Request, res: Response){
-        await db.query('SELECT * FROM material', function(err, result, fields){
+        await db.query('SELECT * FROM cup_type', function(err, result, fields){
             if(err) throw err;
             res.json(result);
         });
@@ -15,18 +15,20 @@ class MaterialController{
         const {
             id
         } = req.params;
-        await db.query('SELECT * FROM material WHERE id_material = ?', [id], function(err, result, fields){
+
+        await db.query('SELECT * FROM cup_type WHERE id_type = ?', [id], function(err, result, fields){
             if(err) throw err;
+            
             if(result.lenght > 0){
                 res.json(result);
             }else{
                 res.status(404).json({
-                    message: 'Material not found.'
+                    message: 'Cup type not found.'
                 });
             }
         });
     }
 }
 
-const materialController = new MaterialController();
-export default materialController;
+const typeController = new TypeController();
+export default typeController;

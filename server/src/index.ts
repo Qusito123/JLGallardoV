@@ -4,6 +4,10 @@ import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
 import colorRoutes from './routes/colorRoutes';
+import materialRoutes from './routes/materialRoutes';
+import typeRoutes from './routes/typeRoutes';
+import inventoryRoutes from './routes/inventoryRoutes';
+import cupRoutes from './routes/cupRoutes';
 
 class Server{
     public app: Application;
@@ -25,6 +29,10 @@ class Server{
     routes(): void{
         this.app.use(indexRoutes);
         this.app.use('/market/color', colorRoutes);
+        this.app.use('/market/material', materialRoutes);
+        this.app.use('/market/type', typeRoutes);
+        this.app.use('/market/inventory', inventoryRoutes);
+        this.app.use('/market/cup', cupRoutes);
     }
 
     start(): void{

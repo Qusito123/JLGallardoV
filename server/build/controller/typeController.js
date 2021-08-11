@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class MaterialController {
+class TypeController {
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('SELECT * FROM material', function (err, result, fields) {
+            yield database_1.default.query('SELECT * FROM cup_type', function (err, result, fields) {
                 if (err)
                     throw err;
                 res.json(result);
@@ -26,7 +26,7 @@ class MaterialController {
     listarUno(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('SELECT * FROM material WHERE id_material = ?', [id], function (err, result, fields) {
+            yield database_1.default.query('SELECT * FROM cup_type WHERE id_type = ?', [id], function (err, result, fields) {
                 if (err)
                     throw err;
                 if (result.lenght > 0) {
@@ -34,12 +34,12 @@ class MaterialController {
                 }
                 else {
                     res.status(404).json({
-                        message: 'Material not found.'
+                        message: 'Cup type not found.'
                     });
                 }
             });
         });
     }
 }
-const materialController = new MaterialController();
-exports.default = materialController;
+const typeController = new TypeController();
+exports.default = typeController;
