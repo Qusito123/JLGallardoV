@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class ColorsService {
 
-  constructor() { }
+  API_URI = 'http://localhost:3000/market/color'; // URI del servicio
+
+  constructor(private http: HttpClient) { }
+
+  // Obtener listado de colores
+  getColors(){
+    return this.http.get(this.API_URI);
+  }
 }

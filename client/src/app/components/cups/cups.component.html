@@ -1,1 +1,104 @@
-<p>cups works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-8">
+        <mat-card>
+            <mat-card-title>
+                Tazas almacenadas
+            </mat-card-title>
+            <mat-card-content>
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="name_type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de taza </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.name_type }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name_color">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.name_color }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="capacity_cup">
+                      <th mat-header-cell *matHeaderCellDef> Capacidad </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.capacity_cup }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dimentions_cup">
+                        <th mat-header-cell *matHeaderCellDef> Dimensiones </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.dimentions_cup }} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="model_cup">
+                        <th mat-header-cell *matHeaderCellDef> Modelo </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.model_cup }} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="name_material">
+                        <th mat-header-cell *matHeaderCellDef> Material </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.name_material }} </td>
+                      </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+
+                  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons>
+                 </mat-paginator>
+            </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-4">
+        <mat-card>
+            <mat-card-title>Agregar Taza</mat-card-title>
+            <form>
+                <mat-form-field appearance="fill">
+                    <mat-label>Seleccione el tipo de taza</mat-label>
+                    <mat-select [formControl]="typeSelect" required>
+                      <mat-option *ngFor="let type of cupTypes" [value]="type.id_type">
+                        {{ type.name_type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Seleccione el color</mat-label>
+                    <mat-select [formControl]="colorSelect" required>
+                      <mat-option *ngFor="let color of colors" [value]="color.id_color">
+                        {{ color.name_color }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                <mat-form-field appearance="fill">
+                  <mat-label>Ingrese las dimensiones</mat-label>
+                  <input matInput placeholder="E.g. 200x200" [formControl]="dimentions" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Ingrese la capacidad</mat-label>
+                    <input matInput placeholder="E.g. 200, 300" [formControl]="capacity" required>
+                    <span matSuffix>ml</span>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Ingrese el modelo</mat-label>
+                    <input matInput placeholder="E.g. AB100" [formControl]="model" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Seleccione el material</mat-label>
+                    <mat-select [formControl]="materialSelect" required>
+                      <mat-option *ngFor="let material of materials" [value]="material.id_material">
+                        {{ material.name_material }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-error *ngIf="campos">{{ mensaje }}</mat-error>
+              </form>
+              <button mat-raised-button color="primary" (click)='enviar()'>Enviar</button>
+          </mat-card>
+      </div>
+    </div>
+  </div>

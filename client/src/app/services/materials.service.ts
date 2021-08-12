@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class MaterialsService {
 
-  constructor() { }
+  API_URI = 'http://localhost:3000/market/material'; // URL del api rest
+
+  constructor(private http: HttpClient) { }
+
+  // Obtener listado de materiales
+  getMaterials(){
+    return this.http.get(this.API_URI);
+  }
 }
